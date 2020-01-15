@@ -1,0 +1,32 @@
+#include<iostream>
+#include<string>
+using namespace std;
+int main()
+{
+	int a,t;
+	cin >> a;
+	string s="";
+	if (a == 0)
+		cout << 0 << endl;
+	else
+	{
+		while (a > 0)
+		{
+			t = a % 16;
+			a /= 16;
+			for (int i = 0; i < 16; i++)
+			{
+				if (t == i)
+				{
+					if (t >= 0 && t < 10)
+						s = char(i + 48) + s;
+					else
+						s = char(i + 55) + s;
+					break;
+				}
+			}
+		}
+		cout << s << endl;
+	}
+	return 0;
+}
