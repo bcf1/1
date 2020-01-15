@@ -1,0 +1,19 @@
+#include<iostream>
+#include<cmath>
+#include<string>
+using namespace std;
+int main()
+{
+	string s ;
+	long long a =0 ;
+	cin >> s;
+	for (int j=0; j <s.size(); j++)
+	{
+		if (s[j] > 47 && s[j] < 58)
+			a += (s[j] - 48) * pow(16, s.size()-j-1);
+		else
+			a += (s[j] - 55) * pow(16, s.size() -j-1);
+	}
+	cout << a << endl;
+	return 0;
+}
