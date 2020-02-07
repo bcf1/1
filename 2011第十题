@@ -1,0 +1,116 @@
+#include<stdio.h>
+#include<stdlib.h>
+#define M 25
+#define N 50
+typedef struct crood
+{
+    int x,y;
+}crood;
+int Size(char*str)
+{
+    int i=0;
+    while(str[i]!=NULL)
+    {
+        i++;
+    }
+    return i;
+}
+int Find(char*str,char ch)
+{
+    int i;
+    for(i=0;i<Size(str);i++)
+    {
+        if(ch==str[i])
+        return 0;
+    }
+    return 1;
+}
+crood Findcrood(char(*s)[5],char ch)
+{
+    int i,j;
+    crood cd;
+    cd.x=-1;
+    cd.y=0;
+    for(i=0;i<5;i++)
+    {
+        for(j=0;j<5;j++)
+            if(s[i][j]==ch)
+            {
+                cd.x=i;
+                cd.y=j;
+            }
+    }
+    return cd;
+}
+int main()
+{
+    char str[M];
+    char str1[N];
+    char str3[100];
+    scanf("%s",str);
+    scanf("%s",str1);
+    int len=Size(str);
+    int i=0,k=0,m=0,j=0;
+    char*s=(char*)malloc((26-len+1)*sizeof(char));
+    for(i=0;k<26-len;i++)
+    {
+        if(Find(str,97+i)!=0)
+        {
+            s[k]=97+i;
+            k++;
+        }
+    }
+    k=0;
+    char str2[5][5];
+    for(i=0;i<5;i++)
+    {
+        for(j=0;j<5;j++)
+        {
+            if(k<len)
+            {
+                str2[i][j]=str[k];
+                k++;
+            }
+            else
+            {
+                str2[i][j]=s[m];
+                m++;
+            }
+        }
+    }
+    int t;
+    if(Size(str1)%2==1)
+        t=Size(str1)-1;
+    else
+        t=Size(str1);
+    for(i=0;i<t;i+=2)
+    {
+        if(str1[i]==str1[i+1])
+        {
+            str3[i]==str1[i];
+            str3[i+1]==str1[i+1];
+        }
+        else
+        {
+            crood crood1=Findcrood(str2,str1[i]);
+            crood crood2=Findcrood(str2,str1[i+1]);
+            if(crood1.x==-1||crood2.x==-1)
+            {
+                str3[i]=str1[i];
+                str3[i+1]=str1[i+1];
+            }
+            else
+            {
+                str3[i]=str2[crood1.x][crood2.y];
+                str3[i+1]=str2[crood2.x][crood1.y];
+            }
+        }
+    }
+    if(t<Size(str1))
+        str3[t]=str1[t];
+    for(i=0;str3[i]!=NULL;i++)
+        printf("%c",str3[i]);
+    printf("\n");
+    free(s);
+    return 0;
+}
