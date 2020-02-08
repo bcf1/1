@@ -1,0 +1,26 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    long long x=10,y=90;
+    int t=1;
+    while(t<=120)
+    {
+        if(t%2==1)
+            y-=x;
+        if(t%4==0)
+            y*=2;
+        if(t%6==0)
+            x*=2;
+        t++;
+        if(y<=0)
+        {
+            y=0;
+            break;
+        }
+    }
+    cout<<y;
+    return 0;
+}
