@@ -1,0 +1,34 @@
+#include <iostream>
+
+using namespace std;
+int F(int n)
+{
+    int m;
+    m=n%10*10000+n/10%10*1000+n/100%10*100+n/1000%10*10+n/10000;
+    return m;
+}
+int F2(int n)
+{
+    if(n%10!=n/10%10&&n/10%10!=n/100%10&&n/100%10!=n/1000%10&&n/1000%10!=n/10000&&n/10000!=n%10)
+        return 1;
+    else
+        return 0;
+}
+int main()
+{
+    for(int i=12345;i<=98765;i++)
+    {
+        if(F2(i)==1)
+        {
+            for(int j=1;j<10&&i*j<98765;j++)
+            {
+                if(i*j==F(i))
+                {
+                     cout<<i<<endl;
+                     return 0;
+                }
+            }
+        }
+    }
+    return 0;
+}
