@@ -1,0 +1,46 @@
+#include <iostream>
+using namespace std;
+#define M 30
+int Size(char*str)
+{
+    int i=0;
+    for(;str[i]!=0;i++){}
+    return i;
+}
+int Change(int n)
+{
+    int s=0;
+    if(n<10)
+        return n;
+    while(n>0)
+    {
+        s+=n%10;
+        n/=10;
+    }
+    return s;
+}
+int main()
+{
+    char str[M]={0};
+    int arr[6]={0};
+    cin>>str;
+    int t=Size(str)/6;
+    for(int i=0;i<t+1;i++)
+    {
+        for(int j=0;j<6;j++)
+        {
+            if(str[j+i*6]!=0)
+            arr[j]+=(int)str[j+i*6];
+        }
+    }
+    for(int i=0;i<6;i++)
+    {
+        int s=Change(arr[i]);
+        while(s>=10)
+        {
+            s=Change(s);
+        }
+        cout<<s;
+    }
+    return 0;
+}
