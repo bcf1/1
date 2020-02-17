@@ -1,0 +1,61 @@
+#include<iostream>
+using namespace std;
+const int Month[] = {31,28,31,30,31,30,31,31,30,31,30,31};
+struct Date {
+	int year, month, day;
+};
+int leapyear(int year)
+{
+	return (year % 4==0 && year % 100!=0) || (year % 400==0 );
+}
+int DateToNum(Date d1)
+{
+	int s=0;
+	for (int i = 1; i < d1.year; i++)
+	{
+		if (leapyear(i) == 1)
+		{
+			s += 366;
+		}
+		else
+			s += 365;
+	}
+	for (int i = 1; i < d1.month; i++)
+	{
+		s += Month[i - 1];
+	}
+	if (leapyear(d1.year) == 1 && d1.month > 2)
+	{
+		s++;
+	}
+	s += d1.day;
+	return s;
+}
+Date NumToDate(int num)
+{
+	Date d1 = {1,1,1};
+	while (num > 365)
+	{
+		if (leapyear(d1.year) == 1)
+			num -= 366;
+		else
+			num -= 365;
+		d1.year++;
+	}
+	while (num > Month[d1.month - 1])
+	{
+		if (leapyear(d1.year) == 1 && d1.month == 2)
+			num--;
+		num -= Month[d1.month - 1];
+		d1.month++;
+	}
+	d1.day = num;
+	return d1;
+}
+int main()
+{
+	Date d = { 1777,4,30 };
+	Date d1= NumToDate(DateToNum(d));
+	cout << d1.year << d1.month << d1.day << endl;
+	return 0;
+}
