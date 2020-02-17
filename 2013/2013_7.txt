@@ -1,0 +1,74 @@
+#include<iostream>
+#include<vector>
+#include<string>
+#include<sstream>
+#include<algorithm>
+using namespace std;
+int main()
+{
+	vector<string> vec;
+	vector<int> vec1;
+	int i,k,j=0,t=0;
+	string n;
+	stringstream ss;
+	char s[100];
+	string s1="";
+	cin >> i;
+	while(gets_s(s)&&j<=i)
+	{
+		j++;
+		for (k = 0; ; k++)
+		{
+			if (s[k] == NULL)
+			{
+				ss.clear();
+				ss << s1;
+				ss >> t;
+				vec1.push_back(t);
+				vec.push_back(s1);
+				break;
+			}
+			if (s[k] == ' ')
+			{
+				ss.clear();
+				ss<<s1;
+				ss >> t;
+				vec1.push_back(t);
+				vec.push_back(s1);
+				s1 = "";
+				continue;
+			}
+			else
+			{
+				s1 += s[k];
+			}
+			
+		}
+		s1 = "";
+	}
+	vector<string>::iterator it1=vec.begin();
+	for (vector<string>::iterator it = vec.begin(); it != vec.end(); it++)
+	{
+		for (it1 = it + 1; it1 != vec.end(); it1++)
+		{
+			if (*it1 == *it)
+			{
+				n = *it1;
+				break;
+			}
+		}
+	}
+	int m;
+	sort(vec1.begin(), vec1.end());
+	vector<int>::iterator it2 = vec1.begin();
+	for (it2; it2 != vec1.end(); it2++)
+	{
+		if (*(it2 + 1) - *it2 == 2)
+		{
+			m = *it2 + 1;
+			break;
+		}
+	}
+	cout << m << " " << n << endl;
+	return 0;
+}
