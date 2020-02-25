@@ -1,0 +1,53 @@
+#include<iostream>
+#include<string>
+#include<vector>
+#include<set>
+using namespace std;
+const int arr[17] = { 7,9,10,5,8,4,2,1,6,3,7,9,10,5,8,4,2 };
+const int cha[11] = { '1','0','X','9','8','7','6','5','4','3','2' };
+int main()
+{
+    vector<string> vec;
+    set<int> st;
+    int n;
+    cin >> n;
+    int s = 0;
+    string s1;
+    for (int i = 0; i < n; i++)
+    {
+        cin >> s1;
+        vec.push_back(s1);
+    }
+    for (int i = 0; i < n; i++)
+    {
+        if (!((vec[i][17] >= 48 && vec[i][17] <= 57) || vec[i][17] == 'X'))
+        {
+            st.insert(i);
+            continue;
+        }
+        for (int j = 0; j < 17; j++)
+        {
+            if (vec[i][j] > 57 || vec[i][j] < 48)
+            {
+                st.insert(i);
+                break;
+            }
+            s += arr[j] * (vec[i][j] - 48);
+        }
+        if (cha[s % 11] !=vec[i][17])
+            st.insert(i);
+        s = 0;
+    }
+    if (st.size() == 0)
+    {
+        cout << "All passed" << endl;
+    }
+    else
+    {
+        for (set<int>::iterator it = st.begin(); it != st.end(); it++)
+        {
+            cout << vec[*it] << endl;
+        }
+    }
+    return 0;
+}
